@@ -2,9 +2,11 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 from excel_parser import SNILS_ERROR_TEXT, get_message
 from snils_chek import snils_chek
+from dotenv import load_dotenv
+import os
 
 
-TOKEN = "5851409776:AAFWqTYPoFaiQDceWZfcZ3DnFLqvGB_STAM"
+TOKEN = ""
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
@@ -24,6 +26,8 @@ async def send_data_from_snils(update: Update, context: ContextTypes.DEFAULT_TYP
 
 
 def main() -> None:
+    load_dotenv()
+    TOKEN = str(os.getenv("BOT_TOKEN"))
 
     app = Application.builder().token(TOKEN).build()
 
